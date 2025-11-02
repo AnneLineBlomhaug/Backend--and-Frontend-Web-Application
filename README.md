@@ -1,13 +1,17 @@
- Virtual Event Management System (VEM)
+
+ # Virtual Event Management System (VEM)
+ 
 The Virtual Event Management System (VEM) is a web application designed to create, manage, and register for virtual events. It features a backend API built with Node.js, Express, and Sequelize (connected to an Aiven MySQL database) and a frontend built with Express and EJS templates, styled with Bootstrap.
- Features
+
+ ## Features
 - Event Management: Create and list events with titles, descriptions, dates, capacities, and unique invite keys.
 - Search: Search events by title, description, or type.
 - Stats: View event attendance statistics (requires authentication).
 - Speakers: List speakers with names and bios.
 - Registration: Register attendees for events using invitation keys.
 - Authentication: JWT-based admin login (default: `admin`/`P4ssword`).
- Project Structure
+  
+ ## Project Structure
 ```
 java/event/
 ??? backend/                Backend API
@@ -46,12 +50,14 @@ java/event/
 ??? README.md                This file
 ```
 
- Prerequisites
+ ## Prerequisites
 - Node.js: v16 or higher
 - npm: v8 or higher
 - MySQL Database: Hosted on Aiven.io (or a local MySQL instance)
 - Aiven SSL Certificate: `ca.pem` for secure database connection
- Setup
+  
+ ## Setup
+ 
  Backend
 1. Navigate to Backend Directory:
    ```powershell
@@ -86,6 +92,7 @@ java/event/
    curl -X POST http://localhost:3000/api/init
    ```
    - Creates tables and seeds initial data (e.g., admin user).
+     
  Frontend
 1. Navigate to Frontend Directory:
    ```powershell
@@ -100,7 +107,9 @@ java/event/
    npm start
    ```
    - Runs on `http://localhost:8000`.
- Usage
+ 
+## Usage
+
 1. Access the App:
    - Open `http://localhost:8000` in your browser.
    - The root page (`index.ejs`) displays and manages events.
@@ -118,7 +127,8 @@ java/event/
      ```
      - Copy the returned `token` and replace `'YOUR_JWT_TOKEN'` in `index.ejs`, `stats.ejs`, and `search.ejs`.
 
- API Endpoints
+ ## API Endpoints
+ 
 - Documentation: View Swagger UI at `http://localhost:3000/doc`.
 - Key Routes:
   - `POST /api/auth/login`: Authenticate admin.
@@ -129,7 +139,8 @@ java/event/
   - `GET /api/speakers`: List speakers.
   - `POST /api/attendees/register`: Register an attendee.
 
- Styling
+ ## Styling
+ 
 - Bootstrap: Used for responsive design and navbar.
 - Custom CSS: `public/css/styles.css` adds shadows, backgrounds, and event card styles.
  Troubleshooting
@@ -142,5 +153,5 @@ java/event/
 - Port Conflicts:
   - Change `PORT` in `backend/.env` or frontend `app.js` if `3000` or `8000` are in use.
 
-License
+## License
 This project is unlicensed use it as you see fit
