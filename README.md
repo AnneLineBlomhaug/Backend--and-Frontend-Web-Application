@@ -71,7 +71,7 @@ java/event/
    - Create a `.env` file in `backend/` with:
      ```
      PORT=3000
-     DB_HOST=mysql-census-onlinelabswriter-census.h.aivencloud.com
+     DB_HOST=mysql-aivencloud.com
      DB_PORT=15592
      DB_USER=avnadmin
      DB_PASS=AVNS__-EaeLbWi1XkCTe6hL6
