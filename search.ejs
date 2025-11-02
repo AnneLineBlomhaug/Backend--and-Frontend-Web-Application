@@ -1,0 +1,30 @@
+<%- include('partials/simple-header', { title: 'Search' }) %>
+  <h1>Search Events</h1>
+  <form id="searchForm" class="mb-3">
+    <div class="mb-3">
+      <input type="text" class="form-control" name="title" placeholder="Title">
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="description" placeholder="Description">
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="eventType" placeholder="Event Type ID">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <div id="results"></div>
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      fetch('http://localhost:3000/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      }).then(res => res.json()).then(data => {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = data.map(event => `<div>${event.title} - ${event.description}</div>`).join('');
+      });
+    });
+  </script>
+<%- include('partials/footer') %>

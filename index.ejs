@@ -1,0 +1,43 @@
+<%- include('partials/simple-header', { title: 'Events' }) %>
+ 
+
+  <h1>Virtual Event Management</h1>
+  <h2>Your Events</h2>
+  <div id="events"></div>
+  <h2>Create Event</h2>
+  <form id="createEvent" class="mb-3">
+    <div class="mb-3">
+      <input type="text" class="form-control" name="title" placeholder="Title" required>
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" name="description" placeholder="Description"></textarea>
+    </div>
+    <div class="mb-3">
+      <input type="datetime-local" class="form-control" name="date" required>
+    </div>
+    <div class="mb-3">
+      <input type="number" class="form-control" name="capacity" placeholder="Capacity" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+  <script>
+    fetch('http://localhost:3000/api/events')
+      .then(res => res.json())
+      .then(data => {
+        const eventsDiv = document.getElementById('events');
+        data.forEach(event => {
+          eventsDiv.innerHTML += `<div class="event">${event.title} - ${new Date(event.date).toLocaleString()} (Key: ${event.inviteKey})</div>`;
+        });
+      });
+
+    document.getElementById('createEvent').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      fetch('http://localhost:3000/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      }).then(res => res.json()).then(data => location.reload());
+    });
+  </script>
+<%- include('partials/footer') %>

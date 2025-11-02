@@ -1,0 +1,32 @@
+<%- include('partials/simple-header', { title: 'Register' }) %>
+  <h1>Register for an Event</h1>
+  <form id="registerForm" class="mb-3">
+    <div class="mb-3">
+      <input type="text" class="form-control" name="invitationkey" placeholder="Invitation Key" required>
+    </div>
+    <div class="mb-3">
+      <input type="email" class="form-control" name="email" placeholder="Email" required>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="name" placeholder="Name" required>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="surname" placeholder="Surname" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+  <div id="message"></div>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      fetch('http://localhost:3000/api/attendees/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      }).then(res => res.json()).then(data => {
+        document.getElementById('message').innerHTML = data.error || 'Registration successful!';
+      });
+    });
+  </script>
+<%- include('partials/footer') %>

@@ -1,0 +1,12 @@
+<%- include('partials/simple-header', { title: 'Speakers' }) %>
+  <h1>Speakers</h1>
+  <div id="speakers"></div>
+  <script>
+    fetch('http://localhost:3000/api/speakers')
+      .then(res => res.json())
+      .then(data => {
+        const speakersDiv = document.getElementById('speakers');
+        speakersDiv.innerHTML = data.map(speaker => `<div>${speaker.name} - ${speaker.bio || 'No bio'}</div>`).join('');
+      });
+  </script>
+<%- include('partials/footer') %>

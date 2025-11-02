@@ -1,0 +1,13 @@
+<%- include('partials/simple-header', { title: 'Starts' }) %>
+  <h1>Event Stats</h1>
+  <div id="stats"></div>
+  <script>
+    const token = 'YOUR_JWT_TOKEN';
+    fetch('http://localhost:3000/api/events/stats', { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(res => res.json())
+      .then(data => {
+        const statsDiv = document.getElementById('stats');
+        statsDiv.innerHTML = data.map(stat => `<div>${stat.title}: ${stat.attendeeCount} attendees</div>`).join('');
+      });
+  </script>
+<%- include('partials/footer') %>
